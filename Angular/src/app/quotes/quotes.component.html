@@ -1,0 +1,33 @@
+
+<h4>Tasks Details <h4> 
+<button type ="button" id="addtask"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Task</button>
+
+
+<table class="table">
+    <thead class="thead">
+        <tr>
+            <th scope="col">Quote Type</th>
+            <th scope="col">Quote#</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Task</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Task Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let dataItem of QuotesList">
+            <td>{{dataItem.Quote_Type}}</td>
+            <td>{{dataItem.QuoteID}}</td>
+            <td>{{dataItem.Contact}}</td>
+            <td>{{dataItem.Task}}</td>
+            <td>{{dataItem.Due_Date | date: "medium"}}</td> 
+            <td>{{dataItem.Task_type}}</td>
+            <td>
+                <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </td>       
+
+        </tr>
+    </tbody>
+</table>
