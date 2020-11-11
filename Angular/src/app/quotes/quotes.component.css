@@ -1,0 +1,45 @@
+#addtask {
+    position: relative;
+    left: 65%;
+    background-color: aquamarine;
+}
+#addtasksmall {
+    background-color: aquamarine;
+}
+#taskDetail {
+    color:navy;
+
+}
+
+.modal-header {
+    background-color: navy;
+}
+
+.modal-content {
+    width: 700px;
+    height: 700px;
+
+}
+
+.modal-title{
+    color:white;
+}
+
+.orderpart {
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 500px;
+
+  
+}
+
+.page{
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 600px;
+}
+.show{
+    display: inline-block;
+    margin-left: 10px;
+}
+

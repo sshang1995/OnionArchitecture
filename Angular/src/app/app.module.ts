@@ -11,6 +11,8 @@ import { AppRoutingModule } from './route/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GuardService } from './guard.service';
+import { FilterTextboxComponent } from './quotes/filter-textbox/filter-textbox.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -18,14 +20,16 @@ import { GuardService } from './guard.service';
     QuotesComponent,
     LoginComponent,
     AddEditQuotesComponent,
-    ShowQuotesComponent
+    ShowQuotesComponent,
+    FilterTextboxComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
     
   ],
   providers: [ShareService, GuardService],

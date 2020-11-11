@@ -1,8 +1,36 @@
+ <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" id="taskDetail" href="http://localhost:4200/quotes"><b>Tasks Details</b></a>
 
-<h4>Tasks Details <h4> 
-<button type ="button" id="addtask"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Task</button>
+        <span class="navbar-toggler" id="addtasksmall" (click)="addClick()" data-toggle="modal" data-target="#ViewModal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-plus-circle"></i> Add Task</span>
+    
+      <span class="nav-item" id="addtask"  data-toggle="modal" data-target="#ViewModal" data-backdrop="static" data-keyboard="false" (click)="addClick()"><i class="fa fa-plus-circle"></i> Add Task</span>
+</nav>
+</div>
 
+<br>
+<div class="show">
+  <b>Show</b>
+      <select name ="showEntries" id="showEntries" [(ngModel)]="i">
+      <option  value ="5">5</option>
+      <option  value ="10">10</option>
+      <option  value ="15">15</option>
+      </select> <b>entries </b>
+      &nbsp;
+</div>
+<div class="orderpart">        
+  Order by: <select name ="orderby" id="orderby" [(ngModel)]="sortcolumn" (click)="sort(sortcolumn)">
+              <option value="quoteID">Quote#</option>
+              <option value="contact">Contact</option>
+              <option value="due_Date">Due Date</option>
+            </select>
+  Descending: <input type="checkbox" name="DES" [(ngModel)]="DES"> &nbsp;    
 
+  <app-filter-textbox (changed)="filter($event)"></app-filter-textbox>
+</div>
+
+<br>
+<br>
 <table class="table">
     <thead class="thead">
         <tr>
@@ -15,19 +43,67 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor = "let dataItem of QuotesList">
-            <td>{{dataItem.Quote_Type}}</td>
-            <td>{{dataItem.QuoteID}}</td>
-            <td>{{dataItem.Contact}}</td>
-            <td>{{dataItem.Task}}</td>
-            <td>{{dataItem.Due_Date | date: "medium"}}</td> 
-            <td>{{dataItem.Task_type}}</td>
+        <tr *ngFor = "let dataItem of QuotesList | paginate: { itemsPerPage: i, currentPage: p }">
+            <td>{{dataItem.quote_Type}}</td>
+            <td>{{dataItem.quoteID}}</td>
+            <td>{{dataItem.contact}}</td>
+            <td>{{dataItem.task}}</td>
+            <td>{{dataItem.due_Date | date: "medium"}}</td> 
+            <td>{{dataItem.task_type}}</td>
             <td>
-                <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;
-                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                <i class="fa fa-eye" aria-hidden="true" data-toggle="modal" data-target="#ViewbtnModal" data-backdrop="static" data-keyboard="false" (click)="viewClick(dataItem)"></i> &nbsp;
+                <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ViewModal" data-backdrop="static" data-keyboard="false" (click)="editClick(dataItem)"></i> &nbsp;
+                <i class="fa fa-trash-o" aria-hidden="true" (click) = "deleteClick(dataItem.QuoteID)"></i>
             </td>       
 
         </tr>
     </tbody>
+
+      <!-- View modal -->
+      <div class="modal fade" id="ViewbtnModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View Detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    (click)="viewcloseClick()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <app-show-quotes [Quote]="Quote" *ngIf="ActivateShowQuote"></app-show-quotes>
+                    </div>
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="viewcloseClick()">Close</button>
+            </div>
+            </div>
+      </div>
+
+
+    <!-- Edit modal -->
+    <div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+              (click)="closeClick()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <app-add-edit-quotes [Quote]="Quote" *ngIf="ActivateAddEditQuote"></app-add-edit-quotes>
+            </div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeClick()">Close</button>
+           
+          </div>
+        </div>
+    </div>
+
 </table>
+<div class="show">
+<b>Showing 1 to {{i}} of {{QuotesList.length}} entries</b>
+</div>
+<div class="page">
+<pagination-controls  screenReaderCurrentLabel="Showing 1 to i of QuotesList.length entries" (pageChange)="p = $event"></pagination-controls>
+</div>

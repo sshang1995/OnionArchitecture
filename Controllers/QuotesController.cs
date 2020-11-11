@@ -11,7 +11,8 @@ using System.Web.Http.Description;
 using Data;
 
 namespace OnionWebAPI.Controllers
-{
+{  
+    //[Authorize]
     public class QuotesController : ApiController
     {
         private AzuredbEntities db = new AzuredbEntities();

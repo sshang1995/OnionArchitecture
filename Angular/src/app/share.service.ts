@@ -10,7 +10,7 @@ export class ShareService {
   constructor(private http: HttpClient) { }
 
   getQuotesList():Observable<any[]>{
-    // var Header = new HttpHeaders({'Authorization': localStorage.getItem('token_type') + ' '+ localStorage.getItem('userToken')});
+    //var Header = new HttpHeaders({'Authorization': localStorage.getItem('token_type') + ' '+ localStorage.getItem('userToken')});
     return this.http.get<any>(this.APIUrl+'/quotes');
   }
 
@@ -36,6 +36,8 @@ export class ShareService {
     return this.http.get(this.APIUrl+'/users?name='+name+'&password='+password)
   }
 
+  dologin:boolean =false;
+
   getUserExist(name:any, email: any){
    
     return this.http.get(this.APIUrl+'/users?name='+name+'&email='+email)
@@ -43,6 +45,19 @@ export class ShareService {
 
   addUser(val:any){
     return this.http.post(this.APIUrl+'/users',val)
+  }
+
+  getToken(name:any, password:any){
+    let body = new URLSearchParams();
+    body.set('username',name);
+    body.set('password', password);
+    body.set('grant_type',"password")
+    let options ={
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }
+
+   
+    return this.http.post("https://localhost:44313/token",body.toString(), options);
   }
 
 

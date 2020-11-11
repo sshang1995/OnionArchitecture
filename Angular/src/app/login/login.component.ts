@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { GuardService } from '../guard.service';
-import { ShareService } from '../share.service';
+import { from } from 'rxjs';
 
+import { ShareService } from '../share.service';
+import {NgForm} from "@angular/forms"
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,12 +11,14 @@ import { ShareService } from '../share.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: ShareService,private route:Router, private guard: GuardService ) { }
-
+  constructor(private service: ShareService,  private router:Router) { }
+  
+  @Input()
   Name:string;
   Email:string;
   Password:string;
   ConfirmPassword:string;
+
 
   ngOnInit(): void {
   }
@@ -26,8 +29,11 @@ export class LoginComponent implements OnInit {
       Password: this.Password
     }
     this.service.getUserLogin(u.Name, u.Password).subscribe(
-      res => {alert("Login Success");
-               this.route.navigate(['/quotes'])},
+      res => {
+              this.service.dologin = true;
+              alert("Login Success");
+              this.router.navigate(['/quotes']);
+              },
       error => (alert("Wrong Password or Name"))
     )
   }

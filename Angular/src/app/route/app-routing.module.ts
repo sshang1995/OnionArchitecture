@@ -6,7 +6,7 @@ import { QuotesComponent } from '../quotes/quotes.component';
 
 const routes: Routes = [
     {path:'login', component:LoginComponent},
-    {path:'quotes', component:QuotesComponent, canActivate:[GuardService]},
+    {path:'quotes', component:QuotesComponent, canActivate:[GuardService] },
     {path: '', component:LoginComponent}
     ];
     @NgModule({

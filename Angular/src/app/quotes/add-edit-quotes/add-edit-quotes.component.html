@@ -1,1 +1,61 @@
-<p>add-edit-quotes works!</p>
+<form #TaskForm = "ngForm" novalidate>
+<div class="form-group row">
+    <label for="Status" class="col-md-4 col-form-label">Status</label>
+    <select class="form-control col-md-4" name ="Status" id="Status">
+        <option value="open">Open</option>
+        <option value="close">Close</option>
+    </select>
+</div>
+<div class="form-group row">
+    <label for="Quote_Type" class="col-md-4 col-form-label">Quote Type</label>
+    <input type="text" class="form-control col-md-4" [(ngModel)]="Quote_Type" id="Quote_Type" name="Quote_Type" required>
+    
+    <label for="Quote_Num" class="col-md-2 col-form-label">Quote Num</label>
+    <input type="text" class="form-control col-md-1" [(ngModel)]="QuoteID" id="Quote_Num" name= "Quote_Num" readonly>
+    <!-- <br>
+    <div *ngIf = "!TaskForm.controls.Quote_Type?.valid && TaskForm.controls.Quote_Type?.touched" class="form-text">
+        This field is required
+    </div> -->
+   
+</div> 
+<div class="form-group row">
+    <label for="Task_type" class="col-md-4 col-form-label">Task Type</label>
+    <input type="text" class="form-control col-md-4" [(ngModel)]="Task_type" id="Task_type" name="Task_type" required>
+    <!-- <br>
+    <div *ngIf = "!TaskForm.controls.Task_Type?.valid && TaskForm.controls.Task_Type?.touched" class="form-text">
+        This field is required
+    </div> -->
+</div> 
+<div class="form-group row">
+    <label for="Contact" class="col-md-4 col-form-label">Contact Name</label>
+    <input type="text" class="form-control col-md-4" [(ngModel)]="Contact" id="Contact" name="Contact" required>
+    <!-- <br>
+    <div *ngIf = "!TaskForm.controls.Contact?.valid && TaskForm.controls.Contact?.touched" class="form-text">
+        This field is required
+    </div> -->
+</div>
+<div class="form-group row">
+    <label for="Task" class="col-md-4 col-form-label">Quote</label>
+    <input type="text" class="form-control col-md-4" [(ngModel)]="Task" id="Task" name="Task" required>
+    <!-- <br>
+    <div *ngIf = "!TaskForm.controls.Task?.valid && TaskForm.controls.Task?.touched" class="form-text">
+        This field is required
+    </div> -->
+</div>
+<div class="form-group row">
+    <label for="Due_Date" class="col-md-4 col-form-label">Due Date</label>
+    <input type="datetime-local" class="form-control col-md-4" [(ngModel)]="Due_Date" id="Due_Date" name="Due_Date" required>
+    <!-- <br>
+    <div *ngIf = "!TaskForm.controls.Due_Date?.valid && TaskForm.controls.Due_Date?.touched" class="form-text">
+        This field is required
+    </div> -->
+</div>
+<div class="form-group row">
+    <label for="task_des" class="col-md-4 col-form-label">Task Description</label>
+</div>
+
+    <input type="text" class="form-control col-md-8" [(ngModel)]="Task" id="task_des" name="Task" style="height:120px; width:680px;" maxlength ="1000" required>
+<br>
+<button type="submit" (click)="addQuote()" *ngIf="Quote.quoteID == 0" class="btn btn-primary" [hidden]="!TaskForm.valid">Add</button>
+<button type="submit" (click)="updateQuote()" *ngIf="Quote.quoteID != 0" class="btn btn-primary"[hidden]="!TaskForm.valid">Update</button>
+</form>
