@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ShareService } from '../share.service';
 
 
@@ -9,7 +10,7 @@ import { ShareService } from '../share.service';
 })
 export class QuotesComponent implements OnInit {
 
-  constructor(private service: ShareService) { }
+  constructor(private service: ShareService, private router:Router) { }
 
   QuotesList:any=[];
   ModalTitle:string;
@@ -54,7 +55,8 @@ export class QuotesComponent implements OnInit {
       contact:"",
       task:"",
       due_Date:"",
-      task_type:""
+      task_type:"",
+      status:""
 
     }
     this.ModalTitle = "Add Task"
@@ -82,6 +84,11 @@ export class QuotesComponent implements OnInit {
   closeClick(){
     this.ActivateAddEditQuote=false;
     this.refreshQuotesList();
+  }
+
+  logout() {
+    this.service.dologin=false;
+    this.router.navigate(['/login']);
   }
 
   filter(data: string){

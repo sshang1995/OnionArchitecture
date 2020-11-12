@@ -63,6 +63,7 @@ namespace OnionWebAPI.Controllers
             target.Contact = quote.Contact;
             target.Due_Date = quote.Due_Date;
             target.Task_type = quote.Task_type;
+            target.status = quote.status;
 
             try
             {

@@ -16,7 +16,8 @@ export class AddEditQuotesComponent implements OnInit {
   Contact:string;
   Task:string;
   Due_Date:Date;
-  Task_type:string
+  Task_type:string;
+  Status:number;
 
   ngOnInit(): void {
     this.QuoteID = this.Quote.quoteID
@@ -25,6 +26,7 @@ export class AddEditQuotesComponent implements OnInit {
     this.Task = this.Quote.task
     this.Due_Date = this.Quote.due_Date
     this.Task_type = this.Quote.task_type
+    this.Status = this.Quote.status
 
   }
 
@@ -35,7 +37,8 @@ export class AddEditQuotesComponent implements OnInit {
       contact: this.Contact,
       task: this.Task,
       due_Date: this.Due_Date,
-      task_type: this.Task_type
+      task_type: this.Task_type,
+      status: this.Status
     }
 
     this.service.updateQuotes(this.Quote.quoteID,q).subscribe(
@@ -51,7 +54,8 @@ export class AddEditQuotesComponent implements OnInit {
       contact: this.Contact,
       task: this.Task,
       due_Date: this.Due_Date,
-      task_type: this.Task_type
+      task_type: this.Task_type,
+      status: this.Status
     }
     this.service.addQuotes(q).subscribe(
       res => {alert("new task add success")},

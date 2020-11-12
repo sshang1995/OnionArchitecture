@@ -16,7 +16,8 @@ export class ShowQuotesComponent implements OnInit {
   Contact:string;
   Task:string;
   Due_Date:Date;
-  Task_type:string
+  Task_type:string;
+  Status:number;
 
   ngOnInit(): void {
     this.QuoteID = this.Quote.quoteID
@@ -25,6 +26,7 @@ export class ShowQuotesComponent implements OnInit {
     this.Task = this.Quote.task
     this.Due_Date = this.Quote.due_Date
     this.Task_type = this.Quote.task_type
+    this.Status = this.Quote.status
 
   }
 

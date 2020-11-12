@@ -3,7 +3,7 @@
       <a class="navbar-brand" id="taskDetail" href="http://localhost:4200/quotes"><b>Tasks Details</b></a>
 
         <span class="navbar-toggler" id="addtasksmall" (click)="addClick()" data-toggle="modal" data-target="#ViewModal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-plus-circle"></i> Add Task</span>
-    
+      <button type ="button" (click)="logout()">Log Out</button>
       <span class="nav-item" id="addtask"  data-toggle="modal" data-target="#ViewModal" data-backdrop="static" data-keyboard="false" (click)="addClick()"><i class="fa fa-plus-circle"></i> Add Task</span>
 </nav>
 </div>
@@ -48,7 +48,7 @@
             <td>{{dataItem.quoteID}}</td>
             <td>{{dataItem.contact}}</td>
             <td>{{dataItem.task}}</td>
-            <td>{{dataItem.due_Date | date: "medium"}}</td> 
+            <td>{{dataItem.due_Date | date: "short"}}</td> 
             <td>{{dataItem.task_type}}</td>
             <td>
                 <i class="fa fa-eye" aria-hidden="true" data-toggle="modal" data-target="#ViewbtnModal" data-backdrop="static" data-keyboard="false" (click)="viewClick(dataItem)"></i> &nbsp;
