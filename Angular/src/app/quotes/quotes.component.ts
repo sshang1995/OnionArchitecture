@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareService } from '../share.service';
-
+import {ToastrService} from 'node_modules/ngx-toastr';
 
 @Component({
   selector: 'app-quotes',
@@ -10,7 +10,7 @@ import { ShareService } from '../share.service';
 })
 export class QuotesComponent implements OnInit {
 
-  constructor(private service: ShareService, private router:Router) { }
+  constructor(private service: ShareService, private router:Router, private toastr: ToastrService ) { }
 
   QuotesList:any=[];
   ModalTitle:string;
@@ -31,7 +31,8 @@ export class QuotesComponent implements OnInit {
   refreshQuotesList(){
     this.service.getQuotesList().subscribe(
       data=>{this.QuotesList=data;},
-      error=> {alert("cannot show data")}
+      error=> { this.toastr.error("Cannot show data","Error")
+      }
       
       );
   }
@@ -66,12 +67,12 @@ export class QuotesComponent implements OnInit {
 
   deleteClick(item){
     if (confirm("Do you want to delete this task?")){
-    this.service.deleteQuotes(item).subscribe(
-      res=> {alert("delete task success");
-            this.refreshQuotesList();
+      this.service.deleteQuotes(item).subscribe(
+      res=> {this.toastr.success("Delete task success","Success")
+             this.refreshQuotesList();
       },
-      error => {alert("something wrong")}
-    )
+      error => {this.toastr.error("Something Wrong", "Error")}
+      )
     }
 
   }

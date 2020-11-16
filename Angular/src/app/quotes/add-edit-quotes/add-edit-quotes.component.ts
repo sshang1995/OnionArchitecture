@@ -1,6 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { ShareService } from 'src/app/share.service';
-
+import {ToastrService} from 'node_modules/ngx-toastr';
 @Component({
   selector: 'app-add-edit-quotes',
   templateUrl: './add-edit-quotes.component.html',
@@ -8,7 +8,7 @@ import { ShareService } from 'src/app/share.service';
 })
 export class AddEditQuotesComponent implements OnInit {
 
-  constructor(private service: ShareService) { }
+  constructor(private service: ShareService, private toastr: ToastrService) { }
 
   @Input() Quote:any;
   QuoteID:string;
@@ -42,8 +42,8 @@ export class AddEditQuotesComponent implements OnInit {
     }
 
     this.service.updateQuotes(this.Quote.quoteID,q).subscribe(
-      res => {alert("Update success!")},
-      error => {alert("something wrong")}
+      res => {this.toastr.success("Update success!", "Success")},
+      error => {this.toastr.error("Something Wrong","Error")}
     )
   }
 
@@ -58,8 +58,8 @@ export class AddEditQuotesComponent implements OnInit {
       status: this.Status
     }
     this.service.addQuotes(q).subscribe(
-      res => {alert("new task add success")},
-      error => {alert(error)}
+      res => { this.toastr.success("New task add success", "Success")},
+      error => {this.toastr.error("Something Wrong","Error")}
 
     )
   }

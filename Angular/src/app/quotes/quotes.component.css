@@ -3,6 +3,12 @@
     left: 65%;
     background-color: aquamarine;
 }
+
+#logout {
+    position: relative;
+    left: 70%;
+   
+}
 #addtasksmall {
     background-color: aquamarine;
 }
@@ -43,3 +49,18 @@
     margin-left: 10px;
 }
 
+tbody{
+    border-top: 1.5px solid black;
+    border-bottom: 1.5px solid black;
+}
+
+thead{
+    font: sans-serif;
+    font-weight: bold;
+    border-bottom: 1.5px solid black;
+    border-top: 1.5px solid black;
+}
+
+#table {
+    font: sans-serif;
+}

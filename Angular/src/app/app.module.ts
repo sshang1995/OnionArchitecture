@@ -14,6 +14,10 @@ import { GuardService } from './guard.service';
 import { FilterTextboxComponent } from './quotes/filter-textbox/filter-textbox.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ToastrModule } from 'node_modules/ngx-toastr';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +33,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut:2000,
+      positionClass:'toast-top-right',
+      preventDuplicates:true
+    }),
     
   ],
   providers: [ShareService, GuardService],

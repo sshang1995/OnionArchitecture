@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
 
+import {ToastrService} from 'node_modules/ngx-toastr';
 import { ShareService } from '../share.service';
 import {NgForm} from "@angular/forms"
 @Component({
@@ -11,7 +12,7 @@ import {NgForm} from "@angular/forms"
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: ShareService,  private router:Router) { }
+  constructor(private service: ShareService,  private router:Router, private toastr: ToastrService) { }
   
   @Input()
   Name:string;
@@ -31,10 +32,16 @@ export class LoginComponent implements OnInit {
     this.service.getUserLogin(u.Name, u.Password).subscribe(
       res => {
               this.service.dologin = true;
-              alert("Login Success");
+              //alert("Login Success");
+              //using toastr
+              this.toastr.success("Login Success","Success");
               this.router.navigate(['/quotes']);
               },
-      error => (alert("Wrong Password or Name"))
+      error => (
+        //alert("Wrong Password or Name")
+        this.toastr.error("Wrong Password or Name","Error")
+  
+        )
     )
   }
 
@@ -50,10 +57,10 @@ export class LoginComponent implements OnInit {
         alert("Password and Confirm Password are not match")
     } else{
     this.service.getUserExist(u.Name,u.Email).subscribe(
-      res => {alert("User exist, use different name and email")},
+      res => {this.toastr.error("User exist, use different name and email","Error")},
       error => {this.service.addUser(u).subscribe(
-        res => {alert("Add New User successful")},
-        error => {alert("Cannot add user")}
+        res => {this.toastr.success("Add New User successful","Success")},
+        error => {this.toastr.error("Cannot add user","Error")}
       )}
       
     )}
